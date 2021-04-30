@@ -33,7 +33,7 @@ export default {
         this.forceCloseAlert();
 
         this.alertModal = this.createAndShowModal("alert-modal",
-                                                     `<div class="message">${name} alerted you</div>`);
+                                                     `<div class="message">${name} wants you to do something!</div>`);
         if (this.alertModal === null)
             return;
 

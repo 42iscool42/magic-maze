@@ -1,22 +1,23 @@
 import game from './game';
 import ui from './ui';
+import helpers from './helpers';
 
 export default {
     allActions: [],
-    role: '',
+    roles: '',
     id: '',
     name: '',
 
     setRoles(roles) {
         // Save my role in window.role
-        this.role = roles;
+        this.roles = roles;
 
         if (game.players.length === 1) {
             this.allActions = roles;
             // First role in shuffled array
-            this.role = roles[0];
+            this.roles = [roles[0]];
 
-            let html = `<p>Current action: <span id="currentAction">${this.role}</span></p>
+            let html = `<p>Current action: <span id="currentAction">${helpers.displayNameForRole(this.roles[0])}</span></p>
             <button id="nextAction">Next action</button>`;
             ui.setHTML('roles', html);
 
@@ -28,10 +29,10 @@ export default {
     },
 
     nextAction() {
-        let i = this.allActions.indexOf(this.role);
+        let i = this.allActions.indexOf(this.roles[0]);
         i = i + 1 === this.allActions.length ? 0 : i + 1;
-        this.role = this.allActions[i];
+        this.roles = [this.allActions[i]];
 
-        ui.setHTML('currentAction', this.role);
-    }
+        ui.setHTML('currentAction', helpers.displayNameForRole(this.roles[0]));
+    },
 }

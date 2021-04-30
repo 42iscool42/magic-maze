@@ -8,7 +8,7 @@ import ui from './ui';
 const size = config.size;
 
 export default class Tile {
-    constructor(tile) {
+    constructor(tile, showCheckerboard) {
         this.id = tile.id;
         this.data = tile.data;
         this.rotation = 0;
@@ -20,6 +20,7 @@ export default class Tile {
         }
         this.x = undefined;
         this.y = undefined;
+        this.showCheckerboard = showCheckerboard;
     }
 
     move(x, y) {
@@ -78,10 +79,13 @@ export default class Tile {
         if (target) this.canBeSet = this.checkCanBeSet(x, y);
 
         // Update SVG transform
-        const _x = (this.x + 2) * size - this.y / 4 * .85 * size;
-        const _y = (this.y + 2) * size + this.x / 4 * .85 * size;
+        const _x = this.x * size - this.y / 4 * .85 * size;
+        const _y = this.y * size + this.x / 4 * .85 * size;
+        const imageOffsetX = this.rotation === 2 || this.rotation === 3 ? -4 * size : 0;
+        const imageOffsetY = this.rotation === 1 || this.rotation === 2 ? -4 * size : 0;
 
-        ui.setAttribute(`tile-${this.id}`, 'transform', `translate(${_x} ${_y}) rotate(${this.rotation * 90}) translate(${-2 * size} ${-2 * size})`);
+        ui.setAttribute(`tile-${this.id}`, 'transform', `translate(${_x} ${_y})`);
+        ui.setAttribute(`tile-${this.id}-image`, 'transform', `rotate(${this.rotation * 90}) translate(${imageOffsetX} ${imageOffsetY})`);
 
         if (this.canBeSet) {
             ui.addClass(`tile-${this.id}`, 'valid');
@@ -325,9 +329,24 @@ export default class Tile {
     createSVG() {
         // this.move(0, 0);
 
-        const svg = `<image id="tile-${this.id}" href="./img/tile${this.id}.jpg" height="${4 * config.size}" width="${4 * config.size}"/>`;
+        let imageSvg = `<g id="tile-${this.id}-image"><image href="./img/tile${this.id}.jpg" height="${4 * config.size}" width="${4 * config.size}"/></g>`;
+        let checkerboardSvg = '';
+        if (this.showCheckerboard) {
+            checkerboardSvg += `<g>`
+            for (let n = 0; n < 4; n++) {
+                for (let m = (n + 1) % 2; m < 4; m += 2) {
+                    const x = n * size + [0, 5, 0, -5][n];
+                    const y = m * size + [0, 5, 0, -5][m];
+                    const w = size + [5, -5, -5, 5][n];
+                    const h = size + [5, -5, -5, 5][m];
 
-        ui.addHTML('tiles', svg);
+                    checkerboardSvg += `<rect  x="${x}" y="${y}" width="${w}" height="${h}" class="checker" />`
+                }
+            }
+            checkerboardSvg += `</g>`;
+        }
+
+        ui.addHTML('tiles', `<g id="tile-${this.id}">${imageSvg}${checkerboardSvg}</g>`);
     }
 
     removeSVG() {

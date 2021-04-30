@@ -22,6 +22,7 @@ body {
     font-family: sans-serif;
     border-right: #DCCCFE;
     z-index: 10;
+    overflow: scroll;
 
     #admin {
         position: absolute;
@@ -108,6 +109,10 @@ body {
                 &.invalid {
                     opacity: .4;
                 }
+            }
+
+            rect.checker {
+                fill: #33333344;
             }
         }
 
@@ -359,4 +364,31 @@ label {
         transform: translateY(-50%);
         color: #827697;
     }
+}
+
+.controls-holder {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+
+    .controls {
+        background-color: #FFFA;
+    }
+
+    td {
+        border: 1px solid #CCC;
+        padding: 4px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    .controls-toggle {
+        
+    }
+}
+
+.hidden {
+    display: none;
 }

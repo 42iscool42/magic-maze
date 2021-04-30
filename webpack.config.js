@@ -35,5 +35,4 @@ module.exports = {
     optimization: {
         // minimizer: process.env.NODE_ENV === 'production' ? [new UglifyJsPlugin()] : [],
     },
-    watch: process.env.NODE_ENV === 'production' ? false : true
 }

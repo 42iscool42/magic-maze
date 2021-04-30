@@ -8,9 +8,12 @@ export default {
     stock: [],         // Array of IDs (to be mixed) of undiscovered tiles to be picked from
     board: [],         // Array of IDs (chronologically) of discovered tiles laying on the board
     pickedTile: false, // ID or false
+    showCheckerboard: false,
 
-    init(deck, tiles) {
+    init(deck, tiles, showCheckerboard) {
         console.debug("Init tiles...");
+
+        this.showCheckerboard = showCheckerboard;
 
         if (tiles) {
             this.initTilesFromExistingTiles(tiles);
@@ -26,7 +29,7 @@ export default {
 
         // Init tiles as objects
         this.all = tiles.all.map(t => {
-            const tile = new Tile(t);
+            const tile = new Tile(t, this.showCheckerboard);
             tile.rotation = t.rotation;
             tile.status = t.status;
             tile.canBeSet = t.canBeSet;
@@ -48,7 +51,7 @@ export default {
             id = parseInt(id);
 
             this.stock.push(id);
-            const tile = new Tile(this.stringToTile(id, deck.tiles[id]));
+            const tile = new Tile(this.stringToTile(id, deck.tiles[id]), this.showCheckerboard);
             this.all.push(tile);
         }
 

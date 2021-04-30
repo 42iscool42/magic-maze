@@ -8,7 +8,8 @@ import player from './player';
 import ui from './ui';
 import user from './user';
 import tiles from './tiles';
-import overlay from "./overlay";
+import overlay from './overlay';
+import helpers from './helpers';
 
 export default {
     init() {
@@ -23,8 +24,9 @@ export default {
 
         socket.on('admin', () => {
             let html = `<h3>Game admin</h3>
-            <p>Bot(s) <input type="number" id="bots" value="0" min="0" max="7" /></p>
+            <p>Bot(s) <input type="number" id="bots" value="0" min="0" max="15" /></p>
             <p>Scenario <input type="number" id="scenario" value="1" min="1" max="15" /></p>
+            <p>Timed <input type="checkbox" id="isTimed" checked /></p>
             <button id="start">Start game</button>`;
 
             ui.setHTML('admin', html);
@@ -40,7 +42,8 @@ export default {
                 // Ask admin for game parameters
                 const bots = parseInt(ui.getProperty('bots', 'value'));
                 const scenario = parseInt(ui.getProperty('scenario', 'value'));
-                socket.emit('settings', {bots, scenario, isSpectator});
+                const isTimed = ui.getProperty('isTimed', 'checked') || false;
+                socket.emit('settings', {bots, scenario, isSpectator, isTimed});
             } else {
                 socket.emit('settings', {isSpectator});
             }
@@ -145,7 +148,7 @@ export default {
                     ${member.isSpectator ? '&#128065;' : ''}
                     ${member.name}
                 </p>
-                <p class="small">${member.roles && member.roles.length > 0 ? `Role(s): ${member.roles.join(', ')}` : ''}</p>
+                <p class="small">${member.roles && member.roles.length > 0 ? `Role(s): ${member.roles.map(helpers.displayNameForRole).join(', ')}` : ''}</p>
             </div>`;
         }
         ui.setHTML('list', membersHTML);

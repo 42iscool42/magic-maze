@@ -21,6 +21,8 @@ export default {
             this.admin = true;
             ai.init(options);
         }
+
+        document.getElementById("controls-toggle").onclick = ui.hideControlsPane;
     },
 
     isAdmin() {

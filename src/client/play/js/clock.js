@@ -7,16 +7,23 @@ export default {
     elapsed: 0,
     remaining: 0,
     inverted: false,
+    enabled: true,
 
     init(clock) {
         this.tick = clock ? clock.tick : 0;
         this.elapsed = clock ? clock.elapsed : 0;
         this.remaining = clock ? clock.remaining : config.timer;
         this.inverted = clock ? clock.inverted : false;
+        this.enabled = clock ? clock.enabled : false;
 
         // Start clock
-        this.ticker();
-        this.interval = setInterval(() => { this.ticker() }, 1000);
+        if (this.enabled) {
+            this.ticker();
+            this.interval = setInterval(() => { this.ticker() }, 1000);
+        } else {
+            // Show infinite time if disabled
+            this.display();
+        }
     },
     
     get() {
@@ -65,6 +72,10 @@ export default {
     },
 
     display() {
-        ui.setHTML('clock', this.toString(this.remaining));
+        if (this.enabled) {
+            ui.setHTML('clock', this.toString(this.remaining));
+        } else {
+            ui.setHTML('clock', '∞');
+        }
     }
 }

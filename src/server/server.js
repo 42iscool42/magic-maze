@@ -1,12 +1,16 @@
 const express = require('express');
-const app = express();
 const path = require('path');
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const http = require('http');
+const socket = require('socket.io');
 
-// TODO: move this
+// TODO: move this 
 const actions = require('../client/play/data/actions.json');
 const Member = require("./member");
+
+express.static.mime.define({'application/javascript': ['js']});
+const app = express();
+const httpServer = http.Server(app);
+const io = socket(httpServer);
 
 app.use(express.static(path.resolve('public')));
 
@@ -14,7 +18,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve('public/home/index.html'));
 });
 
-const listener = http.listen(process.env.PORT || 3000, () => {
+const listener = httpServer.listen(process.env.PORT || 3000, () => {
     console.clear();
     console.log(`✨ App running on port ${listener.address().port}`);
     console.log(`🔗 http://localhost:${listener.address().port}/\n`);
@@ -183,7 +187,10 @@ io.sockets.on('connection', socket => {
         if (socket.id === adminID)
             room.options = {
                 bots: settings.bots,
-                scenario: settings.scenario
+                scenario: settings.scenario,
+                clock: {
+                    isTimed: settings.isTimed,
+                },
             };
 
         // When the spectator status of everyone is known, the game can start
@@ -317,6 +324,7 @@ function start(room) {
                 roles: member.roles || null,
                 scenario: room.options.scenario,
                 members: room.members,
+                isTimed: room.options.isTimed,
                 bots,
                 admin: true
             });
@@ -325,6 +333,7 @@ function start(room) {
                 roles: member.roles || null,
                 scenario: room.options.scenario,
                 members: room.members,
+                isTimed: room.options.isTimed,
             });
         }
     }

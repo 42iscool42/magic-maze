@@ -58,10 +58,10 @@ export default class Hero {
             return path;
         }
 
-        const role = config.debug ? ['up', 'right', 'down', 'left', 'explore', 'escalator', 'vortex'] : player.role;
+        const roles = config.debug ? ['up', 'right', 'down', 'left', 'explore', 'escalator', 'vortex'] : player.roles;
 
         // Check for vortex
-        if (role.includes('vortex')) {
+        if (canVortex(roles, board.get(hero.x, hero.y))) {
             const item = board.get(hero.x, hero.y).item;
             if (item && item.type === 'vortex' && item.color === this.color) {
                 const targetItem = board.get(target.x, target.y).item;
@@ -74,7 +74,7 @@ export default class Hero {
         }
 
         // Check for escalator
-        if (role.includes('escalator')) {
+        if (canEscalate(roles, board.get(hero.x, hero.y))) {
             const escalator = board.get(hero.x, hero.y).escalator;
             if (escalator && escalator.x === target.x && escalator.y === target.y) {
                 path.push({x: hero.x, y: hero.y});
@@ -126,8 +126,8 @@ export default class Hero {
         // No specified target, check for self position (current cell)
         if (!target) target = this.cell;
 
-        // Use player role
-        const role = config.debug ? ['up', 'right', 'down', 'left', 'explore', 'escalator', 'vortex'] : player.role;
+        // Use player roles
+        const roles = config.debug ? ['up', 'right', 'down', 'left', 'explore', 'escalator', 'vortex'] : player.roles;
 
         const path = this.getPath(target);
         if (!path) return;
@@ -193,19 +193,19 @@ export default class Hero {
                 if (goingUp) {
                     path[i].reachable = !cell.walls.top && !next.walls.bottom;
                     if (this.color === 'orange' && cell.walls.top === 'orange' && next.walls.bottom === 'orange') path[i].reachable = true;
-                    if (!role.includes('up')) path[i].reachable = false;
+                    if (!canGoUp(roles, cell)) path[i].reachable = false;
                 } else if (goingDown) {
                     path[i].reachable = !cell.walls.bottom && !next.walls.top;
                     if (this.color === 'orange' && cell.walls.bottom === 'orange' && next.walls.top === 'orange') path[i].reachable = true;
-                    if (!role.includes('down')) path[i].reachable = false;
+                    if (!canGoDown(roles, cell)) path[i].reachable = false;
                 } else if (goingLeft) {
                     path[i].reachable = !cell.walls.left && !next.walls.right;
                     if (this.color === 'orange' && cell.walls.left === 'orange' && next.walls.right === 'orange') path[i].reachable = true;
-                    if (!role.includes('left')) path[i].reachable = false;
+                    if (!canGoLeft(roles, cell)) path[i].reachable = false;
                 } else if (goingRight) {
                     path[i].reachable = !cell.walls.right && !next.walls.left;
                     if (this.color === 'orange' && cell.walls.right === 'orange' && next.walls.left === 'orange') path[i].reachable = true;
-                    if (!role.includes('right')) path[i].reachable = false;
+                    if (!canGoRight(roles, cell)) path[i].reachable = false;
                 }
 
                 // Can't go to time cells when two or more cameras are active
@@ -373,4 +373,33 @@ export default class Hero {
     hasExited() {
         return this.status === 'exited';
     }
+}
+
+function hasRole(requiredRole, currentRoles, cell) {
+    const cellType = cell.coord.x % 2 === 1 !== cell.coord.y % 2 === 1 ? 'odd' : 'even';
+    return currentRoles.includes(requiredRole) || currentRoles.includes(`${requiredRole}-${cellType}`);
+}
+
+function canGoUp(roles, cell) {
+    return hasRole('up', roles, cell);
+}
+
+function canGoRight(roles, cell) {
+    return hasRole('right', roles, cell);
+}
+
+function canGoDown(roles, cell) {
+    return hasRole('down', roles, cell);
+}
+
+function canGoLeft(roles, cell) {
+    return hasRole('left', roles, cell);
+}
+
+function canVortex(roles, cell) {
+    return hasRole('vortex', roles, cell);
+}
+
+function canEscalate(roles, cell) {
+    return hasRole('escalate', roles, cell);
 }

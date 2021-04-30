@@ -48,31 +48,52 @@
         "roles": ["vortex", "left"]
     },
     "12": {
-        "players": [4, 5, 6, 7, 8],
+        "players": [4, 5, 6, 7, 8, 9],
         "roles": ["explore", "down"]
     },
     "13": {
-        "players": [4, 5, 6, 7, 8],
+        "players": [4, 5, 6, 7, 8, 9, 10],
         "roles": ["up"]
     },
     "14": {
-        "players": [4, 5, 6, 7, 8],
+        "players": [4, 5, 6, 7, 8, 9, 10],
         "roles": ["escalator", "right"]
     },
     "15": {
-        "players": [5, 6, 7, 8],
+        "players": [5, 6, 7, 8, 9, 10],
         "roles": ["left"]
     },
     "16": {
-        "players": [6, 7, 8],
+        "players": [6, 7, 8, 9, 10],
         "roles": ["right"]
     },
     "17": {
-        "players": [7, 8],
+        "players": [7, 8, 9, 10],
         "roles": ["down"]
     },
     "18": {
-        "players": [8],
+        "players": [8, 9, 10],
         "roles": ["up"]
+    },
+    "19": {
+        "players": [9, 10],
+        "roles": ["vortex-odd", "left-odd"]
+    },
+    "20": {
+        "players": [9, 10],
+        "roles": ["vortex-even", "left-even"]
+    },
+    "21": {
+        "players": [10],
+        "roles": ["explore", "down-odd"]
+    },
+    "22": {
+        "players": [10],
+        "roles": ["explore", "down-even"]
+    },
+
+    "40": {
+        "players": [1],
+        "roles": ["left-odd", "left-even", "right-odd", "right-even", "up-odd", "up-even", "down-odd", "down-even", "escalator-odd", "escalator-even", "vortex-odd", "vortex-even"]
     }
 }

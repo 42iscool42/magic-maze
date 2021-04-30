@@ -12,6 +12,7 @@ import player from './player';
 import sketch from './sketch';
 import Tile from './tile';
 import tiles from './tiles';
+import ui from './ui';
 
 const allTiles = require('../data/tiles.json');
 const scenarios = require('../data/scenarios.json');
@@ -23,7 +24,7 @@ export default {
         const deck = this.buildDeck(options.scenario);
         board.init(options.board);
         camera.init();
-        tiles.init(deck, options.tiles);
+        tiles.init(deck, options.tiles, options.members.length + options.bots.length > 8);
         events.init();
         heroes.init(options.heroes);
         clock.init(options.clock);

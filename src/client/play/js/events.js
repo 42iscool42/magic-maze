@@ -87,7 +87,7 @@ export default {
 
     mouseDown() {
         // Spectator can't click
-        if (player.role.length === 0) return;
+        if (player.roles.length === 0) return;
 
         const cell = this.getHoveredCell();
 
@@ -163,7 +163,7 @@ export default {
         };
 
         const el = document.elementFromPoint(this.mouse.x, this.mouse.y);
-        if (el.nodeName === 'rect') this.hoveredTile.bcr = el.getBoundingClientRect();
+        if (el && el.nodeName === 'rect') this.hoveredTile.bcr = el.getBoundingClientRect();
         else this.hoveredTile.bcr = null;
 
         const cell = this.getHoveredCell();
@@ -242,7 +242,7 @@ export default {
      * Get next tile from stock
      */
     newTile() {
-        if (!player.role.includes('explore') && !config.debug) return;
+        if (!player.roles.includes('explore') && !config.debug) return;
         if (tiles.getStockSize() === 0) return;
         let canAddTile = false;
 

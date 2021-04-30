@@ -1,7 +1,5 @@
 import Cell from './cell';
 import config from './config';
-import Tile from './tile';
-import tiles from './tiles';
 import ui from './ui';
 
 export default {

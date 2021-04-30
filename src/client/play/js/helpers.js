@@ -7,5 +7,16 @@ export default {
             a[j] = x;
         }
         return a;
+    },
+
+    displayNameForRole(role) {
+        const [roleType, cellType] = role.split('-');
+        if (cellType === undefined) {
+            return roleType;
+        }
+
+        const description = cellType === 'odd' ? '(Dark cells)' : '(Light cells)';
+
+        return `${roleType} ${description}`;	
     }
 }

@@ -29,8 +29,8 @@
         <svg id="svg-el" viewBox="0 0 0 0" xmlns="http://www.w3.org/2000/svg">
             <g id="svg-wrap">
                 <g id="svg">
-                    <g id="board"></g>
                     <g id="tiles"></g>
+                    <g id="board"></g>
                     <g id="path"></g>
                     <g id="items"></g>
                     <g id="heroes"></g>
@@ -39,6 +39,47 @@
             </g>
         </svg>
         <div id="debug"></div>
+    </div>
+    <div class="controls-holder">
+        <table class="controls">
+            <tr>
+                <td>Key</td><td>Action</td>
+            </tr>
+            <tr>
+                <td>W</td><td>Move camera up</td>
+            </tr>
+            <tr>
+                <td>A</td><td>Move camera left</td>
+            </tr>
+            <tr>
+                <td>S</td><td>Move camera down</td>
+            </tr>
+            <tr>
+                <td>D</td><td>Move camera right</td>
+            </tr>
+            <tr>
+                <td>Q</td><td>Zoom out</td>
+            </tr>
+            <tr>
+                <td>E</td><td>Zoom in</td>
+            </tr>
+            <tr>
+                <td>P</td><td>Pause game</td>
+            </tr>
+            <tr>
+                <td>C</td><td>Add new tile (explore)</td>
+            </tr>
+            <tr>
+                <td>R</td><td>Rotate new tile counter clockwise</td>
+            </tr>
+            <tr>
+                <td>T</td><td>Rotate new tile clockwise</td>
+            </tr>
+            <tr>
+                <td>click</td><td>Place new tile</td>
+            </tr>
+        </table>
+        <button id="controls-toggle">Hide Controls</button>
     </div>
 </body>
 </html>
