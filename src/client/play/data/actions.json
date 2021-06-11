@@ -56,44 +56,87 @@
         "roles": ["up"]
     },
     "14": {
-        "players": [4, 5, 6, 7, 8, 9, 10],
+        "players": [4, 5, 6, 7, 8, 9, 10, 11],
         "roles": ["escalator", "right"]
     },
     "15": {
-        "players": [5, 6, 7, 8, 9, 10],
+        "players": [5, 6, 7, 8, 9, 10, 11, 12],
         "roles": ["left"]
     },
     "16": {
-        "players": [6, 7, 8, 9, 10],
+        "players": [6, 7, 8, 9, 10, 11, 12, 13],
         "roles": ["right"]
     },
     "17": {
-        "players": [7, 8, 9, 10],
+        "players": [7, 8, 9, 10, 11, 12, 13, 14],
         "roles": ["down"]
     },
     "18": {
-        "players": [8, 9, 10],
+        "players": [8, 9, 10, 11, 12, 13, 14, 15],
         "roles": ["up"]
     },
     "19": {
-        "players": [9, 10],
+        "players": [9, 10, 11, 12, 13, 14, 15, 16],
         "roles": ["vortex-odd", "left-odd"]
     },
     "20": {
-        "players": [9, 10],
+        "players": [9, 10, 11, 12, 13, 14, 15, 16],
         "roles": ["vortex-even", "left-even"]
     },
     "21": {
-        "players": [10],
+        "players": [10, 11, 12, 13, 14, 15, 16],
         "roles": ["explore", "down-odd"]
     },
     "22": {
-        "players": [10],
+        "players": [10, 11, 12, 13, 14, 15, 16],
         "roles": ["explore", "down-even"]
     },
-
-    "40": {
-        "players": [1],
-        "roles": ["left-odd", "left-even", "right-odd", "right-even", "up-odd", "up-even", "down-odd", "down-even", "escalator-odd", "escalator-even", "vortex-odd", "vortex-even"]
+    "23": {
+        "players": [11, 12, 13, 14, 15, 16],
+        "roles": ["up-odd"]
+    },
+    "24": {
+        "players": [11, 12, 13, 14, 15, 16],
+        "roles": ["up-even"]
+    },
+    "25": {
+        "players": [12, 13, 14, 15, 16],
+        "roles": ["escalator-odd", "right-odd"]
+    },
+    "26": {
+        "players": [12, 13, 14, 15, 16],
+        "roles": ["escalator-even", "right-even"]
+    },
+    "27": {
+        "players": [13, 14, 15, 16],
+        "roles": ["left-odd"]
+    },
+    "28": {
+        "players": [13, 14, 15, 16],
+        "roles": ["left-even"]
+    },
+    "29": {
+        "players": [14, 15, 16],
+        "roles": ["right-odd"]
+    },
+    "30": {
+        "players": [14, 15, 16],
+        "roles": ["right-even"]
+    },
+    "31": {
+        "players": [15, 16],
+        "roles": ["down-odd"]
+    },
+    "32": {
+        "players": [15, 16],
+        "roles": ["down-even"]
+    },
+    "33": {
+        "players": [16],
+        "roles": ["up-odd"]
+    },
+    "34": {
+        "players": [16],
+        "roles": ["upp-even"]
     }
 }
