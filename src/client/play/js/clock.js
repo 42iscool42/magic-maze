@@ -10,11 +10,11 @@ export default {
     enabled: true,
 
     init(clock) {
-        this.tick = clock ? clock.tick : 0;
-        this.elapsed = clock ? clock.elapsed : 0;
-        this.remaining = clock ? clock.remaining : config.timer;
+        this.tick = clock && clock.tick ? clock.tick : 0;
+        this.elapsed = clock && clock.elapsed ? clock.elapsed : 0;
+        this.remaining = clock && clock.remaining ? clock.remaining : config.timer;
         this.inverted = clock ? clock.inverted : false;
-        this.enabled = clock ? clock.enabled : false;
+        this.enabled = clock ? clock.enabled : true;
 
         // Start clock
         if (this.enabled) {

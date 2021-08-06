@@ -401,5 +401,5 @@ function canVortex(roles, cell) {
 }
 
 function canEscalate(roles, cell) {
-    return hasRole('escalate', roles, cell);
+    return hasRole('escalator', roles, cell);
 }

@@ -1,3 +1,15 @@
+function showControlsPane(event) {
+    document.querySelector('.controls').classList.remove("hidden");
+    event.target.innerHTML = "Hide controls";
+    event.target.onclick = hideControlsPane;
+}
+
+function hideControlsPane(event) {
+    document.querySelector('.controls').classList.add('hidden');
+    event.target.innerHTML = 'Show Controls';
+    event.target.onclick = showControlsPane;
+}
+
 export default {
     getById(id) {
         return document.getElementById(id);
@@ -108,15 +120,6 @@ export default {
         const transitionDurationString = window.getComputedStyle(element).transitionDuration;
         return transitionDurationString.substring(0, transitionDurationString.length - 1) * 1000;
     },
-
-    showControlsPane(event) {
-        document.querySelector('.controls').classList.remove("hidden");
-        event.target.innerHTML = "Hide controls";
-        document.getElementById('controls-toggle').onclick = this.hideControlsPane;
-    },
-    hideControlsPane(event) {
-        document.querySelector('.controls').classList.add('hidden');
-        event.target.innerHTML = 'Show Controls';
-        document.getElementById('controls-toggle').onclick = this.showControlsPane;
-    }
+    showControlsPane,
+    hideControlsPane
 }

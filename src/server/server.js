@@ -189,7 +189,7 @@ io.sockets.on('connection', socket => {
                 bots: settings.bots,
                 scenario: settings.scenario,
                 clock: {
-                    isTimed: settings.isTimed,
+                    enabled: settings.isTimed,
                 },
             };
 
@@ -324,7 +324,7 @@ function start(room) {
                 roles: member.roles || null,
                 scenario: room.options.scenario,
                 members: room.members,
-                isTimed: room.options.isTimed,
+                clock: room.options.clock,
                 bots,
                 admin: true
             });
@@ -333,7 +333,8 @@ function start(room) {
                 roles: member.roles || null,
                 scenario: room.options.scenario,
                 members: room.members,
-                isTimed: room.options.isTimed,
+                clock: room.options.clock,
+                bots,
             });
         }
     }

@@ -324,14 +324,14 @@ label {
 }
 
 .alert-modal {
-    box-shadow: 0 0 200px inset #ff0000;
+    box-shadow: 0 0 50px inset #ff0000;
     transition: 3s all;
     user-select: none;
 
     .message {
         top: 8%;
-        color: #ffffff;
-        text-shadow: 2px 2px 2px #e93131, 0px 0px 5px #a59b9b;
+        color: #ff0000;
+        text-shadow: 2px 2px 2px #e93131, 0px 0px 5px #FFFFFF;
         transition: 1s all ease 0.5s;
     }
 
@@ -372,7 +372,7 @@ label {
     bottom: 10px;
 
     .controls {
-        background-color: #FFFA;
+        background-color: #FFFE;
     }
 
     td {
